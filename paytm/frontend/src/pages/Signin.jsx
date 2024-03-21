@@ -15,7 +15,20 @@ export const Signin = () => {
           <InputBox label={"Email"} placeholder={"ajay@gmail.com"} />
           <InputBox label={"Password"} placeholder={"123456"} />
           <div className="pt-4">
-            <Button label={"Sign in"} />
+            <Button
+              onClick={async () => {
+                const response = await axios.get(
+                  "http://localhost:3444/api/v1/user/signup",
+                  {
+                    username,
+                    password,
+                  }
+                );
+                localStorage.setItem("token", response.data.token);
+                navigate("/dashboard");
+              }}
+              label={"Sign in"}
+            />
           </div>
           <BottomWarning
             label={"Don't have an account?"}

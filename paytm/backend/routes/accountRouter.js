@@ -15,7 +15,9 @@ router.get("/balance", authMiddleware, async (req, res) => {
   const details = await Account.findOne({ userId: req.userId });
   //console.log(">>>>>>>>>>>", details);
   if (!details) {
-    return res.status(501).send({ message: "Some error occured, try again" });
+    return res
+      .status(501)
+      .send({ success: false, message: "Some error occured, try again" });
   }
   res.json({ balance: details.balance });
 });
